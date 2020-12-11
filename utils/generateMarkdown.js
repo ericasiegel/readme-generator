@@ -11,7 +11,7 @@ const generateInstall = installText => {
   `;
 };
 
-// generate installation section
+// generate license section
 const generateLicense = licenseText => {
   if (!licenseText) {
     return '';
@@ -25,11 +25,11 @@ const generateLicense = licenseText => {
 };
 
 // generate screenshot section
-const generatePics = picsArr => {
+const generatePics = picturesArr => {
   return `
 
     ## Screenshots
-    ${picsArr
+    ${picturesArr
       .map(({caption, alt, link}) => {
         return `
           ### ${caption}
@@ -46,26 +46,6 @@ const generatePics = picsArr => {
 };
 
 
-// generate screenshot section
-const generateFeatures = featuresArr => {
-  return `
-
-    ## Screenshots
-    ${featuresArr
-      .map(({feature}) => {
-        return `
-          ## Features
-          - ${feature}
-
-        `;
-
-
-      })
-      .join('')
-    }
-
-  `;
-};
 
 
 
@@ -73,12 +53,17 @@ const generateFeatures = featuresArr => {
 function generateMarkdown(data) {
   return `# ${data.title}
 
+  ## Credits
+  ${data.title} made by ${data.author}
+
+
   ## Description
   ${data.description}
 
   ${data.motivation}
 
-  ${data.why}
+  ## Languages
+  ${data.languages.join('- ')}
 
   [${data.title} Deployed Page](${data.link})
 
@@ -86,13 +71,6 @@ function generateMarkdown(data) {
 
   ## Usage
   ${data.usage}
-
-
-  ${generateFeatures(data.features)}
-
-
-  ## Credits
-  ${data.title} made by ${data.author}
 
  
   ${generatePics(data.pics)}
