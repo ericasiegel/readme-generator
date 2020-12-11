@@ -25,19 +25,17 @@ const generateLicense = licenseText => {
 };
 
 // generate screenshot section
-const generatePics = picturesArr => {
+const generatePics = screenShotArr => {
   return `
 
     ## Screenshots
-    ${picturesArr
+    ${screenShotArr
       .map(({caption, alt, link}) => {
         return `
           ### ${caption}
           [${alt}](${link})
 
         `;
-
-
       })
       .join('')
     }

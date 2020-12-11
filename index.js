@@ -1,7 +1,7 @@
 const fs = require('fs');
 const inquirer = require('inquirer');
-const generateMarkdown = require('./utils/generateMarkdown');
-const generageMarkdown = require('./utils/generateMarkdown');
+// const generateMarkdown = require('./utils/generateMarkdown');
+
 
 // array of questions for user
 const promptUser = () => {
@@ -128,8 +128,10 @@ const promptUser = () => {
         }
 
     ]);
-    // .then(answers => console.log(answers));
 };
+
+
+
 const promptPic = picData => {
     console.log(`
     ====================
@@ -137,10 +139,10 @@ const promptPic = picData => {
     ====================
     `);
 
-    // if there's no 'projects' array property, create one
-    // if (!picData.pictures) {
-    //     picData.pictures = [];
-    // }
+    // if there's no 'pictures' array property, create one
+    if (!picData.screenShot) {
+        picData.screenShot = [];
+    }
 
     return inquirer
         .prompt([
@@ -191,21 +193,21 @@ const promptPic = picData => {
             }
             
         ])
-        // .then(pictureData => {
-        //     picData.pictures.push(pictureData);
-        //     if (pictureData.confirmAddPicture) {
-        //         return promptPic(picData);
-        //     } else {
-        //         return picData;
-        //     }
-        // });
+        .then(pictureData => {
+            picData.screenShot.push(pictureData);
+            if (pictureData.confirmAddPicture) {
+                return promptPic(picData);
+            } else {
+                return picData;
+            }
+        });
 };
 
 
 promptUser()
-    .then(answers => console.log(answers))
+    // .then(answers => console.log(answers))
     .then(promptPic)
-    .then(picAnswers => console.log(picAnswers))
+    .then(picData => console.log(picData))
     // .then(picData => {
     //     const readme = generateMarkdown(picData);
     //     fs.writeFile('./dist/README.md', readme, err => {
