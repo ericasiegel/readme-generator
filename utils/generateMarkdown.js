@@ -28,14 +28,14 @@ const generateLicense = licenseText => {
 const generatePics = screenShotArr => {
   return `
 
-    ## Screenshots
+  ## Screenshots
     ${screenShotArr
       .map(({caption, alt, link}) => {
-        return `
-          ### ${caption}
-          [${alt}](${link})
+      return `
+        ### ${caption}
+        [${alt}](${link})
 
-        `;
+      `;
       })
       .join('')
     }
@@ -44,16 +44,13 @@ const generatePics = screenShotArr => {
 };
 
 
-
-
-
 // function to generate markdown for README
 function generateMarkdown(data) {
+    // const { screenShot, ... data} = templateData;
   return `# ${data.title}
 
   ## Credits
   ${data.title} made by ${data.author}
-
 
   ## Description
   ${data.description}
@@ -61,7 +58,7 @@ function generateMarkdown(data) {
   ${data.motivation}
 
   ## Languages
-  ${data.languages.join('- ')}
+  ${data.languages.split('-')}
 
   [${data.title} Deployed Page](${data.link})
 
@@ -70,9 +67,7 @@ function generateMarkdown(data) {
   ## Usage
   ${data.usage}
 
- 
-  ${generatePics(data.pics)}
-
+  ${generatePics(data.screenShot)}
 
   ${generateLicense(data.license)}
 
@@ -81,3 +76,6 @@ function generateMarkdown(data) {
 }
 
 module.exports = generateMarkdown;
+
+  // ### ${data.caption}
+  // [${data.alt}](${data.imageLink})

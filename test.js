@@ -4,8 +4,8 @@ const generateMarkdown = require('./utils/generateMarkdown.js');
 
 
 // array of questions for user
-const promptUser = () => {
-    return inquirer.prompt([
+const questions = [
+    inquirer.prompt([
         // project name question
         {
             type: 'input',
@@ -103,7 +103,7 @@ const promptUser = () => {
         {
             type: 'input',
             name: 'about',
-            message: 'Provide some installation information:',
+            message: 'Provide some information about yourself:',
             when: ({ confirmInstall }) => confirmInstall
         },
         // confirm license section
@@ -125,115 +125,68 @@ const promptUser = () => {
             name: 'languages',
             message: 'What did you build this project with? (Check all that apply)',
             choices: ['JavaScript', 'HTML', 'CSS', 'ES6', 'jQuery', 'Bootstrap', 'Node']
-        }
-
-    ]);
-};
+        },
 
 
-
-const promptPic = picData => {
-    console.log(`
-    =================
-    Add A Screenshot
-    =================
-    `);
-
-    // if there's no 'pictures' array property, create one
-    if (!picData.screenShot) {
-        picData.screenShot = [];
-    }
-
-    return inquirer
-        .prompt([
-            {
-                type: 'input',
-                name: 'caption',
-                message: 'What is the caption for your screenshot? (Required)',
-                validate: projectName => {
-                    if (projectName) {
-                        return true;
-                    } else {
-                        console.log('Please enter screenshot caption!');
-                        return false;
-                    }
+        // images
+        {
+            type: 'input',
+            name: 'caption',
+            message: 'What is the caption for your screenshot? (Required)',
+            validate: projectName => {
+                if (projectName) {
+                    return true;
+                } else {
+                    console.log('Please enter screenshot caption!');
+                    return false;
                 }
-            },
-            {
-                type: 'input',
-                name: 'alt',
-                message: 'Provide a alt description of the screenshot (Required)',
-                validate: projectDescription => {
-                    if (projectDescription) {
-                        return true;
-                    } else {
-                        console.log('Please enter your screenshot alt description!');
-                        return false;
-                    }
+            }
+        },
+        {
+            type: 'input',
+            name: 'alt',
+            message: 'Provide a alt description of the screenshot (Required)',
+            validate: projectDescription => {
+                if (projectDescription) {
+                    return true;
+                } else {
+                    console.log('Please enter your screenshot alt description!');
+                    return false;
                 }
-            },
-            {
-                type: 'input',
-                name: 'link',
-                message: 'Enter the link to the screenshot. (Required)',
-                validate: githubLink => {
-                    if (githubLink) {
-                        return true;
-                    } else {
-                        console.log('Please enter your screenshot link!');
-                        return false;
-                    }
+            }
+        },
+        {
+            type: 'input',
+            name: 'imageLink',
+            message: 'Enter the link to the screenshot. (Required)',
+            validate: githubLink => {
+                if (githubLink) {
+                    return true;
+                } else {
+                    console.log('Please enter your screenshot link!');
+                    return false;
                 }
-            },
-            {
-                type: 'confirm',
-                name: 'confirmAddPicture',
-                message: 'Would you like to add another screenshot?',
-                default: false
             }
-            
-        ])
-        .then(pictureData => {
-            picData.screenShot.push(pictureData);
-            if (pictureData.confirmAddPicture) {
-                return promptPic(picData);
-            } else {
-                return picData;
-            }
-        });
-};
+        },
 
-
-promptUser()
-    // .then(answers => console.log(answers))
-    .then(promptPic)
-    // .then(picData => console.log(picData))
-    .then(picData => {
-        const readme = generateMarkdown(picData);
-        fs.writeFile('./dist/README.md', readme, err => {
-            if (err) {
-                console.log(err);
-                return;
-            }
-            console.log('README created! Go to the dist folder to see it!')
-        })
-    })
-
-
-
-
+    ])
+    .then(answers => console.log(answers))
+];
 
 // function to write README file
-// function writeToFile(fileName, data) {
-//     fs.writeFile()
-// }
+    const readme = generateMarkdown(data);
+    fs.writeFile('./dist/README.md', readme, err => {
+        if (err) {
+            console.log(err);
+            return;
+        }
+        console.log('README created! Go to the dist folder to see it!')
+    })
 
 // function to initialize program
-// function init() {
-//     promptUser();
+function init() {
     
+}
 
-// }
-
-// // function call to initialize program
-// init();
+// function call to initialize program
+init();
