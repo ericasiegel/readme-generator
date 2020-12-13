@@ -1,15 +1,3 @@
-// generate installation section
-const generateInstall = installText => {
-  if (!installText) {
-    return '';
-  }
-  return `
-
-    ## Istallation
-    ${installText}
-
-  `;
-};
 
 // generate license section
 const generateLicense = licenseText => {
@@ -24,16 +12,49 @@ const generateLicense = licenseText => {
   `;
 };
 
+// generate languages section
+// const generateLanguages = languagesArr => {
+//   console.log(languagesArr)
+//   return `
+//   ## Languages
+//     ${languagesArr
+//       .map(({languages}) => {
+//         console.log(languages)
+//       return `
+//         - ${languages}
+
+//       `;
+//       })
+//       .join('')
+//     }
+
+//   `;
+// };
+
+// generate instructions section
+const generateInstructions = instructionsArr => {
+  return `
+  ## App or Install Instructions
+    ${instructionsArr
+      .map(({instructions}) => {
+      return `
+        -${instructions}
+      `;
+      })
+      .join('')
+    }
+  `;
+};
+
 // generate screenshot section
 const generatePics = screenShotArr => {
   return `
-
   ## Screenshots
     ${screenShotArr
       .map(({caption, alt, link}) => {
       return `
-        ### ${caption}
-        [${alt}](${link})
+   ### ${caption}
+   ![${alt}](${link})
 
       `;
       })
@@ -46,7 +67,8 @@ const generatePics = screenShotArr => {
 
 // function to generate markdown for README
 function generateMarkdown(data) {
-    // const { screenShot, ... data} = templateData;
+  console.log(data)
+
   return `# ${data.title}
 
   ## Credits
@@ -58,24 +80,24 @@ function generateMarkdown(data) {
   ${data.motivation}
 
   ## Languages
-  ${data.languages.split('-')}
+  ${data.languages.join(', ')}
 
-  [${data.title} Deployed Page](${data.link})
 
-  ${generateInstall(data.install)}
+  ### Link to the [${data.title} Deployed Page](${data.link})
+
+
+  ${generateInstructions(data.instructions)}
 
   ## Usage
   ${data.usage}
 
-  ${generatePics(data.screenShot)}
-
   ${generateLicense(data.license)}
 
+  ${generatePics(data.screenShot)}
 
 `;
 }
 
 module.exports = generateMarkdown;
 
-  // ### ${data.caption}
-  // [${data.alt}](${data.imageLink})
+// ${generateLanguages(data.languages)}

@@ -3,7 +3,7 @@ const inquirer = require('inquirer');
 const generateMarkdown = require('./utils/generateMarkdown.js');
 
 
-// array of questions for user
+// array of general questions for user
 const promptUser = () => {
     return inquirer.prompt([
         // project name question
@@ -90,22 +90,6 @@ const promptUser = () => {
                 }
             }
         },
-
-
-        // confirm Install instructions
-        {
-            type: 'confirm',
-            name: 'confirmInstall',
-            message: 'Would you like to enter Installation instructions?',
-            default: true
-        },
-        // project install instructions question
-        {
-            type: 'input',
-            name: 'about',
-            message: 'Provide some installation information:',
-            when: ({ confirmInstall }) => confirmInstall
-        },
         // confirm license section
         {
             type: 'confirm',
@@ -130,8 +114,46 @@ const promptUser = () => {
     ]);
 };
 
+// install or app instructions section
+const promptInstall = installData => {
+    console.log(`
+    ======================================
+    Add App or Install Instruction Step(s)
+    ======================================
+    `);
 
+    // if there's no 'install instructions' array property, create one
+    if (!installData.instructions) {
+        installData.instructions = [];
+    }
 
+    return inquirer
+        .prompt([
+            // project license question
+            {
+                type: 'input',
+                name: 'instructions',
+                message: 'List instruction step:',
+            },
+            {
+                type: 'confirm',
+                name: 'confirmAddInstruct',
+                message: 'Would you like to add another step?',
+                default: false
+            }
+            
+        ])
+        .then(installInstructData => {
+            installData.instructions.push(installInstructData);
+            if (installInstructData.confirmAddInstruct) {
+                return promptInstall(installData);
+            } else {
+                return installData;
+            }
+        });
+};
+
+// add screenshot section
 const promptPic = picData => {
     console.log(`
     =================
@@ -206,6 +228,7 @@ const promptPic = picData => {
 
 promptUser()
     // .then(answers => console.log(answers))
+    .then(promptInstall)
     .then(promptPic)
     // .then(picData => console.log(picData))
     .then(picData => {
@@ -215,7 +238,7 @@ promptUser()
                 console.log(err);
                 return;
             }
-            console.log('README created! Go to the dist folder to see it!')
+            console.log('README created! Go to the "dist" folder to see it!')
         })
     })
 
