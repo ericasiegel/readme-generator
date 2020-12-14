@@ -90,6 +90,13 @@ const promptUser = () => {
                 }
             }
         },
+        // project languages
+        {
+            type: 'checkbox',
+            name: 'languages',
+            message: 'What did you build this project with? (Check all that apply)',
+            choices: ['JavaScript', 'HTML', 'CSS', 'ES6', 'jQuery', 'Bootstrap', 'Node']
+        },
         // project link question
         {
             type: 'input',
@@ -104,21 +111,6 @@ const promptUser = () => {
                 }
             }
         },
-        // project usage question
-        {
-            type: 'input',
-            name: 'usage',
-            message: 'What will your project be used for? (Required)',
-            validate: linkInput => {
-                if (linkInput) {
-                    return true;
-                } else {
-                    console.log('Enter Project Usage!');
-                    return false;
-                }
-            }
-        },
-        
         // project license question
         {
             type: 'list',
@@ -155,12 +147,19 @@ const promptUser = () => {
             message: 'How can the user contribute to your project?',
             when: ({ confirmContribute }) => confirmContribute
         },
-        // project languages
+        // project usage question
         {
-            type: 'checkbox',
-            name: 'languages',
-            message: 'What did you build this project with? (Check all that apply)',
-            choices: ['JavaScript', 'HTML', 'CSS', 'ES6', 'jQuery', 'Bootstrap', 'Node']
+            type: 'input',
+            name: 'usage',
+            message: 'What will your project be used for? (Required)',
+            validate: linkInput => {
+                if (linkInput) {
+                    return true;
+                } else {
+                    console.log('Enter Project Usage!');
+                    return false;
+                }
+            }
         }
 
     ]);
@@ -170,7 +169,7 @@ const promptUser = () => {
 const promptAuthors = authorData => {
     console.log(`
     =============
-    Add Author(s)
+    Add Credit(s)
     =============
     `);
 
@@ -185,12 +184,12 @@ const promptAuthors = authorData => {
             {
                 type: 'input',
                 name: 'author',
-                message: 'Author Name: (Required)',
+                message: 'Author or Contributor Name: (Required)',
                 validate: authorInput => {
                     if (authorInput) {
                         return true;
                     } else {
-                        console.log('Enter Author Name(s)!');
+                        console.log('Enter Author or Contributor Name(s)!');
                         return false;
                     }
                 }
@@ -198,12 +197,12 @@ const promptAuthors = authorData => {
             {
                 type: 'input',
                 name: 'github',
-                message: "Link to Author's GitHub: (Required)",
+                message: "Link to Author's GitHub or website: (Required)",
                 validate: githubInput => {
                     if (githubInput) {
                         return true;
                     } else {
-                        console.log('Enter GitHub!');
+                        console.log('Enter GitHub or link!');
                         return false;
                     }
                 }
@@ -211,7 +210,7 @@ const promptAuthors = authorData => {
             {
                 type: 'confirm',
                 name: 'confirmAddAuthor',
-                message: 'Would you like to add another author?',
+                message: 'Would you like to add another author or contributor?',
                 default: false
             }
             

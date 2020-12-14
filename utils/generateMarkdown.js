@@ -1,22 +1,4 @@
 
-// // generate license section
-// const generateLicense = licenseText => {
-//   if (!licenseText) {
-//     return '';
-//   }
-//   return `
-//   ## License
-//   ${licenseText}
-
-//   `;
-// };
-// // generate license link for table of contents
-// const licenseLink = licenseText => {
-//   if (!licenseText) {
-//     return '';
-//   }
-//   return `* [License](#license)`;
-// };
 
 // generate test section
 const generateTest = testText => {
@@ -65,7 +47,9 @@ const generateAuthors = authorsArr => {
   return `
     ${authorsArr
       .map(({author, github}) => {
-      return `[${author}](${github})`;
+      return `
+  - [${author}](${github})
+    `;
       })
       .join(', ')
     }
@@ -80,7 +64,7 @@ const generateFeatures = featuresArr => {
     ${featuresArr
       .map(({features}) => {
       return `
-        -${features}
+  - ${features}
       `;
       })
       .join('')
@@ -97,7 +81,7 @@ const generateInstructions = instructionsArr => {
     ${instructionsArr
       .map(({instructions}) => {
       return `
-        -${instructions}
+  - ${instructions}
       `;
       })
       .join('')
@@ -113,8 +97,8 @@ const generatePics = screenShotArr => {
     ${screenShotArr
       .map(({caption, alt, link}) => {
       return `
-   ### ${caption}
-   ![${alt}](${link})
+  ### ${caption}
+  ![${alt}](${link})
 
       `;
       })
@@ -133,10 +117,7 @@ function generateMarkdown(data) {
   
   ![license](https://img.shields.io/badge/License-${data.license.split(' ').join('%20')}-blue?style=for-the-badge)
 
-  ## Credits
-  ${data.title} made by ${generateAuthors(data.authors)}
-
-
+ 
   ## Description
   ${data.description}
 
@@ -144,15 +125,16 @@ function generateMarkdown(data) {
 
 
   ## Table of Contents
-  * [Credits](#credits)
+  
   * [Description](#description)
   * [Features](#features)
   * [Languages](#languages)
-  * [Installation](#installation)
+  * [Link](#link)
   * [Usage](#usage)
+  * [Installation](#installation)
+  * [Screenshots](#screenshots)
   * [Questions](#questions)
   * [License](#license)
-  * [Screenshots](#screenshots)
   ${contributeLink(data.contribute)}
   ${testLink(data.test)}
 
@@ -161,43 +143,52 @@ function generateMarkdown(data) {
   
 
   ## Languages
+
   ${data.languages.join(', ')}
 
 
-  ### Link to the [${data.title} Deployed Page](${data.link})
+  ## Link 
+
+  [${data.title} Deployed Page](${data.link})
+
+
+  ## Usage
+
+  ${data.usage}
 
 
   ${generateInstructions(data.instructions)}
 
 
-  ## Usage
-  ${data.usage}
+  ${generatePics(data.screenShot)}
+
+  ## Credits
+
+  ${generateAuthors(data.authors)}
 
 
   ## Questions
+
   Find my [GitHub Link](${data.userGithub}) here!
   
   If you have any questions send me an email at [${data.email}](mailto:${data.email})
 
 
-  ${generateContribute(data.contribute)}
-  
-
-  ${generateTest(data.test)}
-  
-
   ## License
+
   This project is covered under ${data.license}
 
 
-  ${generatePics(data.screenShot)}
+  ${generateContribute(data.contribute)}
+  
+
+  ${generateTest(data.test)}=
 
 `;
 }
 
 module.exports = generateMarkdown;
 
-// ${generateLanguages(data.languages)}
 
 
 
