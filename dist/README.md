@@ -1,6 +1,6 @@
 # Readme Generator Test 
   
-  ![license](https://img.shields.io/badge/License-MIT%20License-blue?style=for-the-badge)
+  ![license](https://img.shields.io/badge/License-Eclipse%20Public%20License%202.0-blue?style=for-the-badge)
 
  
   ## Description
@@ -28,21 +28,23 @@
 
   ## Features
     
-  - Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas et egestas magna. Curabitur faucibus turpis sed ante pulvinar cursus. Sed egestas suscipit sapien. Aliquam erat volutpat. Ut in eros condimentum, pretium neque ac, sollicitudin mauris. Vivamus imperdiet, nulla vel efficitur mattis, sapien odio placerat purus, nec luctus magna nisi eget mi.
+  - Lorem ipsum dolor sit amet, consectetur adipiscing elit.
       
-  - Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas et egestas magna. Curabitur faucibus turpis sed ante pulvinar cursus. Sed egestas suscipit sapien. Aliquam erat volutpat. Ut in eros condimentum, pretium neque ac, sollicitudin mauris. Vivamus imperdiet, nulla vel efficitur mattis, sapien odio placerat purus, nec luctus magna nisi eget mi.
+  - Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+      
+  - Lorem ipsum dolor sit amet, consectetur adipiscing elit.
       
   
   
 
   ## Languages
 
-  
+  JavaScript, ES6, Node
 
 
   ## Link 
 
-  [Readme Generator Test Deployed Page](https://github.com/ericasiegel/readme-generator)
+  [Readme Generator Test Deployed Page](https://github.com/ericasiegel)
 
 
   ## Usage
@@ -55,7 +57,11 @@
   ## Installation
   ### App or Install Instructions
     
-  - pic
+  - Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+      
+  - Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+      
+  - Lorem ipsum dolor sit amet, consectetur adipiscing elit.
       
   
 
@@ -64,8 +70,12 @@
 
   ## Screenshots
     
-  ### pic
-  ![puc](test)
+  ### Picture 1
+  ![Picture 1](https://via.placeholder.com/400)
+
+      
+  ### Picture 2
+  ![Picture 2](https://via.placeholder.com/400)
 
       
 
@@ -75,21 +85,21 @@
 
   
     
-  - [Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas et egestas magna. Curabitur faucibus turpis sed ante pulvinar cursus. Sed egestas suscipit sapien. Aliquam erat volutpat. Ut in eros condimentum, pretium neque ac, sollicitudin mauris. Vivamus imperdiet, nulla vel efficitur mattis, sapien odio placerat purus, nec luctus magna nisi eget mi.](test)
+  - [Erica](https://github.com/ericasiegel)
     
   
 
 
   ## Questions
 
-  Find my [GitHub Link](https://github.com/ericasiegel/readme-generator) here!
+  Find my [GitHub Link](https://github.com/ericasiegel) here!
   
   If you have any questions send me an email at [siegel.erica@gmail.com](mailto:siegel.erica@gmail.com)
 
 
   ## License
 
-  This project is covered under MIT License
+  This project is covered under Eclipse Public License 2.0
 
 
   
@@ -105,5 +115,4 @@
   ## Testing
   Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas et egestas magna. Curabitur faucibus turpis sed ante pulvinar cursus. Sed egestas suscipit sapien. Aliquam erat volutpat. Ut in eros condimentum, pretium neque ac, sollicitudin mauris. Vivamus imperdiet, nulla vel efficitur mattis, sapien odio placerat purus, nec luctus magna nisi eget mi.
 
-  =
 

@@ -23,9 +23,9 @@ JavaScript, ES6, Node.js, npm Inquirer Package
 
 [README.md Generator GitHub](https://github.com/ericasiegel/readme-generator.git)
 
-[Generated Readme Example]()
+[Generated Readme Example](./dist/README.md)
 
-[Readme Generator Video Walkthrough](https://github.com/ericasiegel/readme-generator.git)
+[Readme Generator Video Walkthrough](https://drive.google.com/file/d/1bSsO3riAMIBBmArgwPs3Bpj3Bp59rJK4/view)
 
 ## Installation
 

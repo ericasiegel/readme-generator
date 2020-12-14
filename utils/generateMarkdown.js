@@ -182,7 +182,7 @@ function generateMarkdown(data) {
   ${generateContribute(data.contribute)}
   
 
-  ${generateTest(data.test)}=
+  ${generateTest(data.test)}
 
 `;
 }
