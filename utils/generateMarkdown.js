@@ -5,14 +5,11 @@ const generateLicense = licenseText => {
     return '';
   }
   return `
-
-    ## License
-    ${licenseText}
+  ## License
+  ${licenseText}
 
   `;
 };
-
-
 // generate license link for table of contents
 const licenseLink = licenseText => {
   if (!licenseText) {
@@ -21,16 +18,69 @@ const licenseLink = licenseText => {
   return `* [License](#license)`;
 };
 
+// generate test section
+const generateTest = testText => {
+  if (!testText) {
+    return '';
+  }
+  return `
+  ## Testing
+  ${testText}
+
+  `;
+};
+// generate test link for table of contents
+const testLink = testText => {
+  if (!testText) {
+    return '';
+  }
+  return `* [Test](#test)`;
+};
+
+
+// generate contribute section
+const generateContribute = contributeText => {
+  if (!contributeText) {
+    return '';
+  }
+  return `
+  ## Contributing
+  ${contributeText}
+
+  `;
+};
+// generate test link for table of contents
+const contributeLink = contributeText => {
+  if (!contributeText) {
+    return '';
+  }
+  return `* [Contributing](#contributing)`;
+};
+
+
 // generate Authors section
 const generateAuthors = authorsArr => {
   return `
     ${authorsArr
       .map(({author, github}) => {
-      return `
-        [${author}](${github})
-      `;
+      return `[${author}](${github})`;
       })
       .join(', ')
+    }
+  `;
+};
+
+// generate features section
+const generateFeatures = featuresArr => {
+  return `
+  ## Features
+    ${featuresArr
+      .map(({features}) => {
+      return `
+        -${features}
+      `;
+      })
+      .join('')
     }
   `;
 };
@@ -77,7 +127,7 @@ function generateMarkdown(data) {
   return `# ${data.title}
 
   ## Credits
-  ${data.title} made by ${generateAuthors(data.author)}
+  ${data.title} made by ${generateAuthors(data.authors)}
 
   ## Description
   ${data.description}
@@ -87,13 +137,18 @@ function generateMarkdown(data) {
   ## Table of Contents
   * [Credits](#credits)
   * [Description](#description)
+  * [Features](#features)
   * [Languages](#languages)
   * [Installation](#installation)
   * [Usage](#usage)
   * [Questions](#questions)
-  * [Screenshots](#Screenshots)
-  * ${licenseLink}
+  * [Screenshots](#screenshots)
+  ${contributeLink(data.contribute)}
+  ${licenseLink(data.license)}
+  ${testLink(data.test)}
 
+  ${generateFeatures(data.features)}
+  
   ## Languages
   ${data.languages.join(', ')}
 
@@ -108,8 +163,12 @@ function generateMarkdown(data) {
 
   ## Questions
   Find my [GitHub Link](${data.userGithub}) here!
-  If you have any questions send me an email at [${email}](mailto:${email})
+  If you have any questions send me an email at [${data.email}](mailto:${data.email})
 
+  ${generateContribute(data.contribute)}
+  
+  ${generateTest(data.test)}
+  
   ${generateLicense(data.license)}
 
   ${generatePics(data.screenShot)}

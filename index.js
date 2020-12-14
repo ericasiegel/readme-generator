@@ -48,20 +48,6 @@ const promptUser = () => {
                 }
             }
         },
-        {
-            type: 'input',
-            name: 'title',
-            message: 'What is the title of your project? (Required)',
-            validate: nameInput => {
-                if (nameInput) {
-                    return true;
-                } else {
-                    console.log('Enter Project Title!');
-                    return false;
-                }
-            }
-        },
-
         // project name question
         {
             type: 'input',
@@ -146,6 +132,35 @@ const promptUser = () => {
             message: 'Provide Licensing information',
             when: ({ confirmLicense }) => confirmLicense
         },
+        // confirm tests section
+        {
+            type: 'confirm',
+            name: 'confirmTest',
+            message: 'Would you like to provide testing information?',
+            default: true
+        },
+        // project tests question
+        {
+            type: 'input',
+            name: 'test',
+            message: 'How can the user test your project',
+            when: ({ confirmTest }) => confirmTest
+        },
+        // confirm contributing section
+        {
+            type: 'confirm',
+            name: 'confirmContribute',
+            message: 'Would you like to provide contributing information?',
+            default: true
+        },
+        // project tests question
+        {
+            type: 'input',
+            name: 'contribute',
+            message: 'How can the user contribute to your project?',
+            when: ({ confirmContribute }) => confirmContribute
+        },
+        // project languages
         {
             type: 'checkbox',
             name: 'languages',
@@ -212,6 +227,45 @@ const promptAuthors = authorData => {
                 return promptAuthors(authorData);
             } else {
                 return authorData;
+            }
+        });
+};
+
+// features section
+const promptFeatures = featuresData => {
+    console.log(`
+    ==============
+    Add Feature(s)
+    ==============
+    `);
+
+    // if there's no 'features' array property, create one
+    if (!featuresData.features) {
+        featuresData.features = [];
+    }
+
+    return inquirer
+        .prompt([
+            // project license question
+            {
+                type: 'input',
+                name: 'features',
+                message: 'List feature:',
+            },
+            {
+                type: 'confirm',
+                name: 'confirmAddFeature',
+                message: 'Would you like to add another feature?',
+                default: false
+            }
+            
+        ])
+        .then(projFeatData => {
+            featuresData.features.push(projFeatData);
+            if (projFeatData.confirmAddFeature) {
+                return promptFeatures(featuresData);
+            } else {
+                return featuresData;
             }
         });
 };
@@ -330,6 +384,7 @@ const promptPic = picData => {
 
 promptUser()
     .then(promptAuthors)
+    .then(promptFeatures)
     .then(promptInstall)
     .then(promptPic)
     .then(picData => {
