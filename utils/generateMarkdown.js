@@ -12,29 +12,34 @@ const generateLicense = licenseText => {
   `;
 };
 
-// generate languages section
-// const generateLanguages = languagesArr => {
-//   console.log(languagesArr)
-//   return `
-//   ## Languages
-//     ${languagesArr
-//       .map(({languages}) => {
-//         console.log(languages)
-//       return `
-//         - ${languages}
 
-//       `;
-//       })
-//       .join('')
-//     }
+// generate license link for table of contents
+const licenseLink = licenseText => {
+  if (!licenseText) {
+    return '';
+  }
+  return `* [License](#license)`;
+};
 
-//   `;
-// };
+// generate Authors section
+const generateAuthors = authorsArr => {
+  return `
+    ${authorsArr
+      .map(({author, github}) => {
+      return `
+        [${author}](${github})
+      `;
+      })
+      .join(', ')
+    }
+  `;
+};
 
 // generate instructions section
 const generateInstructions = instructionsArr => {
   return `
-  ## App or Install Instructions
+  ## Installation
+  ### App or Install Instructions
     ${instructionsArr
       .map(({instructions}) => {
       return `
@@ -72,12 +77,22 @@ function generateMarkdown(data) {
   return `# ${data.title}
 
   ## Credits
-  ${data.title} made by ${data.author}
+  ${data.title} made by ${generateAuthors(data.author)}
 
   ## Description
   ${data.description}
 
   ${data.motivation}
+
+  ## Table of Contents
+  * [Credits](#credits)
+  * [Description](#description)
+  * [Languages](#languages)
+  * [Installation](#installation)
+  * [Usage](#usage)
+  * [Questions](#questions)
+  * [Screenshots](#Screenshots)
+  * ${licenseLink}
 
   ## Languages
   ${data.languages.join(', ')}
@@ -91,6 +106,10 @@ function generateMarkdown(data) {
   ## Usage
   ${data.usage}
 
+  ## Questions
+  Find my [GitHub Link](${data.userGithub}) here!
+  If you have any questions send me an email at [${email}](mailto:${email})
+
   ${generateLicense(data.license)}
 
   ${generatePics(data.screenShot)}
@@ -101,3 +120,6 @@ function generateMarkdown(data) {
 module.exports = generateMarkdown;
 
 // ${generateLanguages(data.languages)}
+
+
+

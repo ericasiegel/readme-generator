@@ -6,7 +6,48 @@ const generateMarkdown = require('./utils/generateMarkdown.js');
 // array of general questions for user
 const promptUser = () => {
     return inquirer.prompt([
-        // project name question
+        // enter user's name
+        {
+            type: 'input',
+            name: 'name',
+            message: 'What is your name? (Required)',
+            validate: nameInput => {
+                if (nameInput) {
+                    return true;
+                } else {
+                    console.log('Enter your name!');
+                    return false;
+                }
+            }
+        },
+        // enter user's GitHub
+        {
+            type: 'input',
+            name: 'userGithub',
+            message: 'What is the link to your GitHub? (Required)',
+            validate: nameInput => {
+                if (nameInput) {
+                    return true;
+                } else {
+                    console.log('Enter GitHub link!');
+                    return false;
+                }
+            }
+        },
+        //enter user's email
+        {
+            type: 'input',
+            name: 'email',
+            message: 'What is your email address? (Required)',
+            validate: nameInput => {
+                if (nameInput) {
+                    return true;
+                } else {
+                    console.log('Enter your email!');
+                    return false;
+                }
+            }
+        },
         {
             type: 'input',
             name: 'title',
@@ -20,16 +61,17 @@ const promptUser = () => {
                 }
             }
         },
-        // project authors question
+
+        // project name question
         {
             type: 'input',
-            name: 'author',
-            message: 'Who was the author(s) of this project? (Required)',
-            validate: authorInput => {
-                if (authorInput) {
+            name: 'title',
+            message: 'What is the title of your project? (Required)',
+            validate: nameInput => {
+                if (nameInput) {
                     return true;
                 } else {
-                    console.log('Enter Author Name(s)!');
+                    console.log('Enter Project Title!');
                     return false;
                 }
             }
@@ -112,6 +154,66 @@ const promptUser = () => {
         }
 
     ]);
+};
+
+// install or app instructions section
+const promptAuthors = authorData => {
+    console.log(`
+    =============
+    Add Author(s)
+    =============
+    `);
+
+    // if there's no 'install instructions' array property, create one
+    if (!authorData.authors) {
+        authorData.authors = [];
+    }
+
+    return inquirer
+        .prompt([
+            // project license question
+            {
+                type: 'input',
+                name: 'author',
+                message: 'Author Name: (Required)',
+                validate: authorInput => {
+                    if (authorInput) {
+                        return true;
+                    } else {
+                        console.log('Enter Author Name(s)!');
+                        return false;
+                    }
+                }
+            },
+            {
+                type: 'input',
+                name: 'github',
+                message: "Link to Author's GitHub: (Required)",
+                validate: githubInput => {
+                    if (githubInput) {
+                        return true;
+                    } else {
+                        console.log('Enter GitHub!');
+                        return false;
+                    }
+                }
+            },
+            {
+                type: 'confirm',
+                name: 'confirmAddAuthor',
+                message: 'Would you like to add another author?',
+                default: false
+            }
+            
+        ])
+        .then(contributorData => {
+            authorData.authors.push(contributorData);
+            if (contributorData.confirmAddAuthor) {
+                return promptAuthors(authorData);
+            } else {
+                return authorData;
+            }
+        });
 };
 
 // install or app instructions section
@@ -227,10 +329,9 @@ const promptPic = picData => {
 
 
 promptUser()
-    // .then(answers => console.log(answers))
+    .then(promptAuthors)
     .then(promptInstall)
     .then(promptPic)
-    // .then(picData => console.log(picData))
     .then(picData => {
         const readme = generateMarkdown(picData);
         fs.writeFile('./dist/README.md', readme, err => {
