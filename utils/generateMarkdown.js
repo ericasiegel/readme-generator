@@ -1,22 +1,22 @@
 
-// generate license section
-const generateLicense = licenseText => {
-  if (!licenseText) {
-    return '';
-  }
-  return `
-  ## License
-  ${licenseText}
+// // generate license section
+// const generateLicense = licenseText => {
+//   if (!licenseText) {
+//     return '';
+//   }
+//   return `
+//   ## License
+//   ${licenseText}
 
-  `;
-};
-// generate license link for table of contents
-const licenseLink = licenseText => {
-  if (!licenseText) {
-    return '';
-  }
-  return `* [License](#license)`;
-};
+//   `;
+// };
+// // generate license link for table of contents
+// const licenseLink = licenseText => {
+//   if (!licenseText) {
+//     return '';
+//   }
+//   return `* [License](#license)`;
+// };
 
 // generate test section
 const generateTest = testText => {
@@ -24,6 +24,7 @@ const generateTest = testText => {
     return '';
   }
   return `
+
   ## Testing
   ${testText}
 
@@ -34,7 +35,7 @@ const testLink = testText => {
   if (!testText) {
     return '';
   }
-  return `* [Test](#test)`;
+  return `* [Testing](#testing)`;
 };
 
 
@@ -44,6 +45,7 @@ const generateContribute = contributeText => {
     return '';
   }
   return `
+
   ## Contributing
   ${contributeText}
 
@@ -73,6 +75,7 @@ const generateAuthors = authorsArr => {
 // generate features section
 const generateFeatures = featuresArr => {
   return `
+
   ## Features
     ${featuresArr
       .map(({features}) => {
@@ -88,6 +91,7 @@ const generateFeatures = featuresArr => {
 // generate instructions section
 const generateInstructions = instructionsArr => {
   return `
+
   ## Installation
   ### App or Install Instructions
     ${instructionsArr
@@ -104,6 +108,7 @@ const generateInstructions = instructionsArr => {
 // generate screenshot section
 const generatePics = screenShotArr => {
   return `
+
   ## Screenshots
     ${screenShotArr
       .map(({caption, alt, link}) => {
@@ -124,15 +129,19 @@ const generatePics = screenShotArr => {
 function generateMarkdown(data) {
   console.log(data)
 
-  return `# ${data.title}
+  return `# ${data.title} 
+  
+  ![license](https://img.shields.io/badge/License-${data.license.split(' ').join('%20')}-blue?style=for-the-badge)
 
   ## Credits
   ${data.title} made by ${generateAuthors(data.authors)}
+
 
   ## Description
   ${data.description}
 
   ${data.motivation}
+
 
   ## Table of Contents
   * [Credits](#credits)
@@ -142,13 +151,15 @@ function generateMarkdown(data) {
   * [Installation](#installation)
   * [Usage](#usage)
   * [Questions](#questions)
+  * [License](#license)
   * [Screenshots](#screenshots)
   ${contributeLink(data.contribute)}
-  ${licenseLink(data.license)}
   ${testLink(data.test)}
+
 
   ${generateFeatures(data.features)}
   
+
   ## Languages
   ${data.languages.join(', ')}
 
@@ -158,18 +169,26 @@ function generateMarkdown(data) {
 
   ${generateInstructions(data.instructions)}
 
+
   ## Usage
   ${data.usage}
 
+
   ## Questions
   Find my [GitHub Link](${data.userGithub}) here!
+  
   If you have any questions send me an email at [${data.email}](mailto:${data.email})
+
 
   ${generateContribute(data.contribute)}
   
+
   ${generateTest(data.test)}
   
-  ${generateLicense(data.license)}
+
+  ## License
+  This project is covered under ${data.license}
+
 
   ${generatePics(data.screenShot)}
 
