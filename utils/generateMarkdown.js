@@ -7,8 +7,8 @@ const generateTest = testText => {
   }
   return `
 
-  ## Testing
-  ${testText}
+## Testing
+${testText}
 
   `;
 };
@@ -28,8 +28,8 @@ const generateContribute = contributeText => {
   }
   return `
 
-  ## Contributing
-  ${contributeText}
+## Contributing
+${contributeText}
 
   `;
 };
@@ -48,7 +48,7 @@ const generateAuthors = authorsArr => {
     ${authorsArr
       .map(({author, github}) => {
       return `
-  - [${author}](${github})
+- [${author}](${github})
     `;
       })
       .join(', ')
@@ -60,11 +60,11 @@ const generateAuthors = authorsArr => {
 const generateFeatures = featuresArr => {
   return `
 
-  ## Features
+## Features
     ${featuresArr
       .map(({features}) => {
       return `
-  - ${features}
+- ${features}
       `;
       })
       .join('')
@@ -76,12 +76,12 @@ const generateFeatures = featuresArr => {
 const generateInstructions = instructionsArr => {
   return `
 
-  ## Installation
-  ### App or Install Instructions
+## Installation
+### App or Install Instructions
     ${instructionsArr
       .map(({instructions}) => {
       return `
-  - ${instructions}
+- ${instructions}
       `;
       })
       .join('')
@@ -93,12 +93,12 @@ const generateInstructions = instructionsArr => {
 const generatePics = screenShotArr => {
   return `
 
-  ## Screenshots
+## Screenshots
     ${screenShotArr
       .map(({caption, alt, link}) => {
       return `
-  ### ${caption}
-  ![${alt}](${link})
+### ${caption}
+![${alt}](${link})
 
       `;
       })
@@ -113,76 +113,77 @@ const generatePics = screenShotArr => {
 function generateMarkdown(data) {
   console.log(data)
 
-  return `# ${data.title} 
+return `
+# ${data.title} 
   
-  ![license](https://img.shields.io/badge/License-${data.license.split(' ').join('%20')}-blue?style=for-the-badge)
+![license](https://img.shields.io/badge/License-${data.license.split(' ').join('%20')}-blue?style=for-the-badge)
 
  
-  ## Description
-  ${data.description}
+## Description
+${data.description}
 
-  ${data.motivation}
+${data.motivation}
 
 
-  ## Table of Contents
+## Table of Contents
   
-  * [Description](#description)
-  * [Features](#features)
-  * [Languages](#languages)
-  * [Link](#link)
-  * [Usage](#usage)
-  * [Installation](#installation)
-  * [Screenshots](#screenshots)
-  * [Questions](#questions)
-  * [License](#license)
-  ${contributeLink(data.contribute)}
-  ${testLink(data.test)}
+* [Description](#description)
+* [Features](#features)
+* [Languages](#languages)
+* [Link](#link)
+* [Usage](#usage)
+* [Installation](#installation)
+* [Screenshots](#screenshots)
+* [Questions](#questions)
+* [License](#license)
+${contributeLink(data.contribute)}
+${testLink(data.test)}
 
 
-  ${generateFeatures(data.features)}
-  
-
-  ## Languages
-
-  ${data.languages.join(', ')}
-
-
-  ## Link 
-
-  [${data.title} Deployed Page](${data.link})
-
-
-  ## Usage
-
-  ${data.usage}
-
-
-  ${generateInstructions(data.instructions)}
-
-
-  ${generatePics(data.screenShot)}
-
-  ## Credits
-
-  ${generateAuthors(data.authors)}
-
-
-  ## Questions
-
-  Find my [GitHub Link](${data.userGithub}) here!
-  
-  If you have any questions send me an email at [${data.email}](mailto:${data.email})
-
-
-  ## License
-
-  This project is covered under ${data.license}
-
-
-  ${generateContribute(data.contribute)}
+${generateFeatures(data.features)}
   
 
-  ${generateTest(data.test)}
+## Languages
+
+${data.languages.join(', ')}
+
+
+## Link 
+
+[${data.title} Deployed Page](${data.link})
+
+
+## Usage
+
+${data.usage}
+
+
+${generateInstructions(data.instructions)}
+
+
+${generatePics(data.screenShot)}
+
+## Credits
+
+${generateAuthors(data.authors)}
+
+
+## Questions
+
+Find my [GitHub Link](${data.userGithub}) here!
+  
+If you have any questions send me an email at [${data.email}](mailto:${data.email})
+
+
+## License
+
+This project is covered under ${data.license}
+
+
+${generateContribute(data.contribute)}
+  
+
+${generateTest(data.test)}
 
 `;
 }
